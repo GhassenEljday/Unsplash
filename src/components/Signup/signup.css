@@ -1,0 +1,47 @@
+.container {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  top: 10rem;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 30rem;
+  height: 30rem;
+  margin: 0 auto;
+}
+
+.form {
+  position: relative;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.signup-inputs {
+  display: block;
+  margin: 1rem;
+  padding: 0.5rem;
+  width: 85%;
+}
+
+.image-signup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login {
+  margin-top: 1.5rem;
+}
+
+.redFlag {
+  background-color: #ec7063;
+  color: white;
+  padding: 1rem;
+  border-radius: 0.8rem;
+}

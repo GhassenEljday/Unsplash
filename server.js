@@ -1,14 +1,24 @@
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 const MOGO_URI = require("./config/mogoose.config");
+const userRoute = require("./routes/user.routes.js");
+const userController = require("./controllers/user.controller.js");
+
+const PORT = process.env.PORT || 4000;
 
 const app = express();
 
 app.use(morgan("combined"));
 app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cors());
+app.use("/api/users", userRoute);
 
-const PORT = process.env.PORT || 4000;
+//! get all users and display it on "/api/users"
+app.get("/api/users", userController.getAll);
 
 mongoose.connect(MOGO_URI, {
   useNewUrlParser: true,
@@ -23,6 +33,4 @@ mongoose.connection.on("error", (err) => {
 
 mongoose.connection.once("open", () => console.log("connected to mongo"));
 
-app.listen(PORT, () =>
-  console.log(`connected on port "${PORT}" open http://localhost:${PORT}/`)
-);
+app.listen(PORT, () => console.log(`connected on port "${PORT}"`));
