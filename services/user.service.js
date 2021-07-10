@@ -15,6 +15,14 @@ module.exports = new (class UserService {
     return this.user.findOne({ _id });
   }
 
+  getUserByEmail(Email) {
+    return this.user.findOne({ email: Email });
+  }
+
+  getUserByUsername(userName) {
+    return this.user.findOne({ username: userName });
+  }
+
   updateUserById({ _id }, payload) {
     return this.user.findOneAndUpdate({ _id }, payload, {
       new: true,

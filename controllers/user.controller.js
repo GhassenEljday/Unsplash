@@ -1,12 +1,23 @@
 const userService = require("../services/user.service.js");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 module.exports = {
   async addUser(req, res) {
     try {
-      const user = await userService.addUser(req.body);
-      res.send(user);
+      bcrypt.genSalt(saltRounds, (err, salt) => {
+        bcrypt.hash(req.body.password, salt, async (err, hash) => {
+          const newUser = {
+            username: req.body.username,
+            email: req.body.email,
+            password: hash,
+          };
+          const user = await userService.addUser(newUser);
+          res.send(user);
+        });
+      });
     } catch (error) {
-      res.send("error");
+      res.send(error);
     }
   },
 

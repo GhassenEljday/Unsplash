@@ -17,6 +17,11 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use("/api/users", userRoute);
 
+app.use((err, req, res, next) => {
+  console.log("congrats you hit the error middleware");
+  console.log(err);
+});
+
 //! get all users and display it on "/api/users"
 app.get("/api/users", userController.getAll);
 
