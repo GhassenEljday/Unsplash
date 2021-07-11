@@ -1,10 +1,11 @@
 import { FC } from "react";
 import "./App.css";
-import Signup from "./components/Signup";
+import Router from "./Router";
+
 const App: FC = () => {
   return (
     <div className="App">
-      <Signup />
+      <Router />
     </div>
   );
 };

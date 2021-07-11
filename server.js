@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const MOGO_URI = require("./config/mogoose.config");
 const userRoute = require("./routes/user.routes.js");
-const userController = require("./controllers/user.controller.js");
+const errorController = require("./middlewares/errorController.js");
 
 const PORT = process.env.PORT || 4000;
 
@@ -17,13 +17,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use("/api/users", userRoute);
 
-app.use((err, req, res, next) => {
-  console.log("congrats you hit the error middleware");
-  console.log(err);
-});
-
-//! get all users and display it on "/api/users"
-app.get("/api/users", userController.getAll);
+app.use(errorController);
 
 mongoose.connect(MOGO_URI, {
   useNewUrlParser: true,

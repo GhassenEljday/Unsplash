@@ -5,19 +5,19 @@ const saltRounds = 10;
 module.exports = {
   async addUser(req, res) {
     try {
-      bcrypt.genSalt(saltRounds, (err, salt) => {
-        bcrypt.hash(req.body.password, salt, async (err, hash) => {
-          const newUser = {
-            username: req.body.username,
-            email: req.body.email,
-            password: hash,
-          };
-          const user = await userService.addUser(newUser);
-          res.send(user);
-        });
-      });
+      const salt = await bcrypt.genSalt(saltRounds);
+      const hash = await bcrypt.hash(req.body.password, salt);
+      const newUser = {
+        username: req.body.username,
+        email: req.body.email,
+        password: hash,
+      };
+      const user = await userService.addUser(newUser);
+      res.send(user);
     } catch (error) {
-      res.send(error);
+      if (error.code === 11000) {
+        res.status(400).send("this user already exists");
+      }
     }
   },
 
@@ -26,7 +26,9 @@ module.exports = {
       const users = await userService.getUsers();
       res.send(users);
     } catch (error) {
-      res.send("error");
+      res.send(error);
     }
   },
+
+  async getUserByName(req, res) {},
 };

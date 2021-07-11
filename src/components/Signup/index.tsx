@@ -23,7 +23,7 @@ const Signup: FC = () => {
           console.log(response);
         })
         .catch((err) => {
-          console.error("you have an issue on Signup tsx", err);
+          alert(err.response.data);
         });
     }
   };
