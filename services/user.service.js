@@ -20,7 +20,9 @@ module.exports = new (class UserService {
   }
 
   getUserByUsername(userName) {
-    return this.user.findOne({ username: userName });
+    return this.user
+      .findOne({ username: userName })
+      .orFail(() => "this user is not registered");
   }
 
   updateUserById({ _id }, payload) {

@@ -1,8 +1,9 @@
 import { FC, useState } from "react";
 import "./signup.css";
 import axios from "axios";
+import { RouteChildrenProps } from "react-router-dom";
 
-const Signup: FC = () => {
+const Signup: FC<RouteChildrenProps> = ({ history }) => {
   const [redFlag, setRedFlag] = useState(false);
 
   const CreateAccount = (e: any) => {
@@ -60,7 +61,7 @@ const Signup: FC = () => {
             placeholder="Password"
             required
           />
-          <button className="signup-inputs" type="submit">
+          <button id="but-ca" className="signup-inputs" type="submit">
             {" "}
             Create Account
           </button>
@@ -75,9 +76,12 @@ const Signup: FC = () => {
         </form>
       </div>
       <div className="image-signup">
-        <img src="images/signup-image.jpg" alt="" />
+        <img id="sig-img" src="images/Images-pana.png" alt="" />
         <span className="login">
-          You already have an account? <a href="">Login</a>
+          You already have an account?{" "}
+          <a onClick={() => history.push("/login")} href="#">
+            Login
+          </a>
         </span>
       </div>
     </div>

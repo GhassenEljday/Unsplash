@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.first-slide {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+}
+
+#co-name {
+  font-size: 5rem;
+}
+
+.welcoming {
+  display: block;
+  justify-content: center;
+}
+
+#but-ca {
+  margin-top: 2rem;
+  padding: 0.7rem;
+  background-color: #efb864;
+  border: 0 none;
+  cursor: pointer;
+  color: #fff;
+  font-size: 1rem;
+}
+
+#but-ca:hover {
+  background-color: #d49e4b;
+  transition: 0.5s;
+}
+
+#home-info {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 5rem;
+  text-align: left;
+  line-height: 2.2rem;
+}
+
+.home-container {
+  width: 100%;
+}
+
+#gallery {
+  width: 100%;
+}

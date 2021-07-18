@@ -1,11 +1,12 @@
+require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const MOGO_URI = require("./config/mogoose.config");
 const userRoute = require("./routes/user.routes.js");
 const errorController = require("./middlewares/errorController.js");
+const authRouter = require("./routes/auth.routes.js");
 
 const PORT = process.env.PORT || 4000;
 
@@ -16,10 +17,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 app.use("/api/users", userRoute);
+app.use("/api/auth", authRouter);
 
 app.use(errorController);
 
-mongoose.connect(MOGO_URI, {
+mongoose.connect(process.env.MOGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,

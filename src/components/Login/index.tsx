@@ -1,20 +1,23 @@
 import { FC, useState } from "react";
 import "./login.css";
-import axios from "axios";
+import axios from "../../api";
+import { RouteChildrenProps } from "react-router-dom";
 
-const Login: FC = () => {
+const Login: FC<{ handleLogin: () => void } & RouteChildrenProps> = ({
+  handleLogin,
+  history,
+}) => {
   const [userInfo, setUserInfo] = useState({ username: "", password: "" });
 
   const loginWithAccount = async (e: any) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "http://localhost:4000/api/users/login",
-        userInfo
-      );
-      console.log(res);
+      const res = await axios.post("/auth/login", userInfo);
+      localStorage.setItem("token", res.data);
+      handleLogin();
+      history.push("/gallery");
     } catch (err) {
-      alert(err.response.data);
+      console.log(err);
     }
   };
 
@@ -42,16 +45,19 @@ const Login: FC = () => {
             onChange={handelChange}
             required
           />
-          <button className="signup-inputs" type="submit">
+          <button id="but-ca" className="signup-inputs" type="submit">
             {" "}
             Login
           </button>
         </form>
       </div>
       <div className="image-signup">
-        <img src="images/signup-image.jpg" alt="" />
+        <img id="sig-img" src="images/Images-cuate.png" alt="" />
         <span className="login">
-          You don't have an account? <a href="">Sign up</a>
+          You don't have an account?{" "}
+          <a onClick={() => history.push("/signup")} href="#">
+            Sign up
+          </a>
         </span>
       </div>
     </div>
