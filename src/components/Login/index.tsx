@@ -17,7 +17,7 @@ const Login: FC<{ handleLogin: () => void } & RouteChildrenProps> = ({
       handleLogin();
       history.push("/gallery");
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data);
     }
   };
 
